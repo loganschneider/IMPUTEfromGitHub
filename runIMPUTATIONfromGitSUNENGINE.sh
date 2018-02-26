@@ -24,23 +24,23 @@ fi
 
 
 #Download or update the git repository
-if [ -d "IMPUTE_PIPELINE_MIGNOT_SLURM_VER" ]
+if [ -d "IMPUTE-PIPELINE-MIGNOT-LAB" ]
 then
 	echo "Will get the latest Github update of IMPUTE-PIPELINE-MIGNOT-LAB"
-	rm -rf $workdir/IMPUTE_PIPELINE_MIGNOT_SLURM_VER
-	git clone https://github.com/loganschneider/IMPUTE_PIPELINE_MIGNOT_SLURM_VER.git
-	find IMPUTE_PIPELINE_MIGNOT_SLURM_VER -type d -exec chmod 777 {} \;
+	rm -rf $workdir/IMPUTE-PIPELINE-MIGNOT-LAB
+	git clone https://github.com/adiamb/IMPUTE-PIPELINE-MIGNOT-LAB.git
+	find IMPUTE-PIPELINE-MIGNOT-LAB -type d -exec chmod 777 {} \;
 else
 	echo "Downloading latest commit of the pipeline"
-	git clone https://github.com/loganschneider/IMPUTE_PIPELINE_MIGNOT_SLURM_VER.git
-	find IMPUTE_PIPELINE_MIGNOT_SLURM_VER -type d -exec chmod 777 {} \;
+	git clone https://github.com/adiamb/IMPUTE-PIPELINE-MIGNOT-LAB.git
+	find IMPUTE-PIPELINE-MIGNOT-LAB -type d -exec chmod 777 {} \;
 fi
 
 #Change permissions on all files in pipeline
-find IMPUTE_PIPELINE_MIGNOT_SLURM_VER -type f -exec chmod 777 {} \;
+find IMPUTE-PIPELINE-MIGNOT-LAB -type f -exec chmod 777 {} \;
 
 #Copy imputation pipeline files into current working directory that contains the PLINK binaries to be imputed
-yes | cp -a IMPUTE_PIPELINE_MIGNOT_SLURM_VER/* $workdir
+yes | cp -a IMPUTE-PIPELINE-MIGNOT-LAB/* $workdir
 
-impute="$(find . -maxdepth 1 -name "IMPUTE_PIPELINE_SLURM*")"
+impute="$(find . -maxdepth 1 -name "IMPUTE_PIPELINE*")"
 $impute $binaries
